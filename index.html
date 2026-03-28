@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robux Generator</title>
+</head>
+<body>
+    <h1>Robux Generator</h1>
+    <label for="robuxAmount">Enter Robux amount:</label>
+    <input type="number" id="robuxAmount" min="1">
+    <button onclick="generateRobux()">Generate Robux</button>
+    <p id="message"></p>
+
+    <script>
+        async function generateRobux() {
+            const amount = document.getElementById("robuxAmount").value;
+            const response = await fetch("/generate_robux", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount: amount })
+            });
+            const data = await response.json();
+            document.getElementById("message").innerText = data.message;
+        }
+    </script>
+</body>
+</html>
